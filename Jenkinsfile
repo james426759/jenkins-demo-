@@ -1,5 +1,5 @@
 node('haimaxy-jnlp') {
-    stage('Prepare') {
+    stage('PrepareStage') {
         echo "1.Prepare Stage"
         checkout scm
         script {
@@ -27,7 +27,6 @@ node('haimaxy-jnlp') {
         echo "5. Deploy Stage"
         if (env.BRANCH_NAME == 'master') {
             input "確認部署到線上環境嗎?"
-            // input "确认要部署线上环境吗？"
         }
         sh "sed -i 's/<BUILD_TAG>/${build_tag}/' k8s.yaml"
         sh "sed -i 's/<BRANCH_NAME>/${env.BRANCH_NAME}/' k8s.yaml"
